@@ -23,12 +23,17 @@ public class S10_ProyectoFinal_MiaBelen {
        while (opcion > 0 && opcion < 4){
         switch (opcion){
             case 1: 
-                    
-                JOptionPane.showConfirmDialog(null, "Bienvenido a Les Chats de Cuisine!\nLas Reglas son las siguientes: \n¿Listo para comenzar?");
+                System.out.println("Bienvenido a Les Chats de Cuisine!\nLas Reglas son las siguientes: \n¿Listo para comenzar?"); 
                 int tablero_elec = ran.nextInt(1,4); 
                 char [][] tablero = cdc.escoger_matriz(tablero_elec); 
+                char [][] temp = new char [10][10]; 
                 cdc.Imprimir_tab(tablero);
                 System.out.println(" ");
+                for (int i = 0; i < 10; i++) {
+                    temp = cdc.Jugar(tablero);
+                    tablero = temp; 
+                }
+                
                 
                 
                 break; 

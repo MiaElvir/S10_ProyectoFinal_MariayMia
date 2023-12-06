@@ -2,9 +2,11 @@
 package s10_proyectofinal_mia.belen;
 
 import java.util.Random; 
+import java.util.Scanner;
 
 public class ChatsDeCuisine {
     Random ran = new Random(); 
+    Scanner papoy = new Scanner(System.in); 
     
     int size = 10;
     char [][] op1 = new char [size][size]; 
@@ -12,6 +14,8 @@ public class ChatsDeCuisine {
     char [][] op3 = new char [size][size]; 
     int posx = 0; 
     int posy = 0; 
+    int papas = 0; 
+    int sopas = 0; 
 
     
 
@@ -65,8 +69,27 @@ public class ChatsDeCuisine {
     public void setPosy(int posy) {
         this.posy = posy;
     }
+
+    public int getPapas() {
+        return papas;
+    }
+
+    public void setPapas(int papas) {
+        this.papas = papas;
+    }
+
+    public int getSopas() {
+        return sopas;
+    }
+
+    public void setSopas(int sopas) {
+        this.sopas = sopas;
+    }
     
-    public char [][] escoger_matriz(int num_matriz){
+    
+    
+    
+   public char [][] escoger_matriz(int num_matriz){
         //GATOTUILLE
         char [][] matriz1 = {{'_','_','P','P','_','P','_','C','_','P'},
                              {'P','_','P','_','P','C','_','P','_','_'},
@@ -117,15 +140,63 @@ public class ChatsDeCuisine {
        int dado = ran.nextInt(0,7); 
        return dado;    
    }
+   
+   
     
-    public char [][] Jugar(char tab_actual[][], int x, int y){
+    public char [][] Jugar(char tab_actual[][]){
+        int dado = ran.nextInt(0,7);
+        System.out.println("El dado tiro: "+dado);
         char [][] temp = tab_actual; 
-        int posx = x; 
-        int posy = y; 
-        temp[x][y] = 'G'; 
+        posx = this.posx; 
+        posy = this.posy; 
+        System.out.println("h"+posx+","+posy);
+        if (posx < 10 && ((posx += dado) < 9)){
+            posx += dado; 
+            posy = this.posy; 
+        }else{
+            posx = 0; 
+            posy++;
+            posx +=dado; 
+        }
+        System.out.println(this.posx+", "+this.posy);
+        
+        if (temp[posx][posy]=='P'){
+            papas++; 
+        }else if(temp[posx][posy]=='C'){
+            if(this.papas < 2){
+                System.out.println("No tiene suficientes papas para cocinar\nTendras que seguir colectando");
+                //Luego de esto mostrar el tirar dado 
+                
+            }else{
+           
+                //se divide entre 2 y esa es la cantidad de sopas que se pueden hacer 
+                boolean impar = false; 
+                if (this.papas % 2 == 0){
+                    impar = true; 
+                }else{
+                //Vemos si es impar porque si es impar se deben de calcular las papas restantes
+                    int sopas_posibles = this.papas / 2; 
+                    System.out.println("Podemos cocinar "+sopas_posibles+" sopas\n¿Las cocinamos?\nSi = S o No = N");
+                    char cocinar = papoy.next().charAt(0); 
+                    while (cocinar != 'S' || cocinar != 'N' || cocinar != 'n' || cocinar != 's'){
+                        System.out.println("Debe ingresar S o N\nIngrese De Nuevo: ");
+                        cocinar = papoy.next().charAt(0);
+                    }
+                    if (cocinar == 'S' || cocinar == 's'){
+                        this.sopas += sopas_posibles;
+                        this.papas -= sopas_posibles*2; 
+                        System.out.println("Sopas Listas, Sigamos");
+                    }
+                    
+                } 
+            }
+                
+        }//si es cacerola
+        temp[posx][posy]='G';
         
         return temp; 
     }//jugar
+
     
     public void rondas(){
         //rondas con un for o while
