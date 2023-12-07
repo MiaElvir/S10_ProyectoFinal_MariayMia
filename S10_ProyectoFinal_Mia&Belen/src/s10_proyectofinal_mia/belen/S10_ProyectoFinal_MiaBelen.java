@@ -26,13 +26,21 @@ public class S10_ProyectoFinal_MiaBelen {
                 System.out.println("Bienvenido a Les Chats de Cuisine!\nLas Reglas son las siguientes: \n¿Listo para comenzar?"); 
                 int tablero_elec = ran.nextInt(1,4); 
                 char [][] tablero = cdc.escoger_matriz(tablero_elec); 
-                char [][] temp = new char [10][10]; 
+                System.out.println("Tablero Elegido: ");
                 cdc.Imprimir_tab(tablero);
-                System.out.println(" ");
+                //rondas y que luego llame a jugar 
                 for (int i = 0; i < 10; i++) {
-                    temp = cdc.Jugar(tablero);
-                    tablero = temp; 
+                    cdc.Jugar(tablero);
+                    System.out.println("si o no");
+                    char s = papoy.next().charAt(0);
+                    if (s == 's'){
+                        continue; 
+                    }else{
+                        break; 
+                    }
                 }
+                System.out.println(" ");
+                
                 
                 
                 

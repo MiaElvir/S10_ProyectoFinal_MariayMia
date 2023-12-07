@@ -91,39 +91,39 @@ public class ChatsDeCuisine {
     
    public char [][] escoger_matriz(int num_matriz){
         //GATOTUILLE
-        char [][] matriz1 = {{'_','_','P','P','_','P','_','C','_','P'},
-                             {'P','_','P','_','P','C','_','P','_','_'},
-                             {'C','P','_','P','P','P','_','P','C','P'},
-                             {'_','P','_','C','P','_','C','_','_','C'},
-                             {'P','_','C','P','_','P','C','_','C','_'},
-                             {'_','_','P','C','_','P','_','P','P','P'},
-                             {'P','P','P','_','P','C','_','P','_','C'},
-                             {'_','P','_','P','_','P','_','P','C','P'},
-                             {'_','_','_','C','P','_','C','_','_','C'},
-                             {'P','_','C','P','_','P','C','_','P','_'}
+        char [][] matriz1 = {{' ',' ','P','P',' ','P',' ','C',' ','P'},
+                             {'P',' ','P',' ','P','C',' ','P',' ',' '},
+                             {'C','P',' ','P','P','P',' ','P','C','P'},
+                             {' ','P',' ','C','P',' ','C',' ',' ','C'},
+                             {'P',' ','C','P',' ','P','C',' ','C',' '},
+                             {' ',' ','P','C',' ','P',' ','P','P','P'},
+                             {'P','P','P',' ','P','C',' ','P',' ','C'},
+                             {' ','P',' ','P',' ','P',' ','P','C','P'},
+                             {' ',' ',' ','C','P',' ','C',' ',' ','C'},
+                             {'P',' ','C','P',' ','P','C',' ','P',' '}
                             };
                                  
-        char [][] matriz2 = {{'_','_','P','_','C','P','_','P','_','P'},
-                             {'P','_','P','_','P','_','C','P','_','P'},
-                             {'C','P','_','P','_','P','C','_','_','C'},
-                             {'P','_','C','P','P','_','P','P','_','P'},
-                             {'P','P','_','P','_','P','_','_','C','_'},
-                             {'_','_','P','_','C','P','_','P','_','P'},
-                             {'P','_','P','C','P','_','p','_','P','_'},
-                             {'p','P','_','_','_','P','_','_','_','C'},
-                             {'P','_','C','P','P','_','_','P','_','P'},
-                             {'C','P','_','P','_','P','P','_','C','_'}
+        char [][] matriz2 = {{' ',' ','P',' ','C','P',' ','P',' ','P'},
+                             {'P',' ','P',' ','P',' ','C','P',' ','P'},
+                             {'C','P',' ','P',' ','P','C',' ',' ','C'},
+                             {'P',' ','C','P','P',' ','P','P',' ','P'},
+                             {'P','P',' ','P',' ','P',' ',' ','C',' '},
+                             {' ',' ','P',' ','C','P',' ','P',' ','P'},
+                             {'P',' ','P','C','P',' ','p',' ','P',' '},
+                             {'p','P',' ',' ',' ','P',' ',' ',' ','C'},
+                             {'P',' ','C','P','P',' ',' ','P',' ','P'},
+                             {'C','P',' ','P',' ','P','P',' ','C',' '}
                             }; 
-        char [][] matriz3 = {{'_','_','_','P','_','C','P','C','_','P'},
-                             {'P','C','_','P','P','_','_','P','_','P'},
-                             {'_','P','C','P','_','P','C','C','_','P'},
-                             {'_','P','_','_','C','_','_','_','P','_'},
-                             {'P','_','P','_','C','P','_','P','_','C'},
-                             {'P','_','_','P','_','C','P','C','_','P'},
-                             {'P','C','_','P','_','P','_','P','_','C'},
-                             {'_','P','C','P','_','_','C','P','_','_'},
-                             {'_','_','P','_','C','_','P','_','P','C'},
-                             {'C','_','P','_','C','P','_','P','_','C'}
+        char [][] matriz3 = {{' ',' ',' ','P',' ','C','P','C',' ','P'},
+                             {'P','C',' ','P','P',' ',' ','P',' ','P'},
+                             {' ','P','C','P',' ','P','C','C',' ','P'},
+                             {' ','P',' ',' ','C',' ',' ',' ','P',' '},
+                             {'P',' ','P',' ','C','P',' ','P',' ','C'},
+                             {'P',' ',' ','P',' ','C','P','C',' ','P'},
+                             {'P','C',' ','P',' ','P',' ','P',' ','C'},
+                             {' ','P','C','P',' ',' ','C','P',' ',' '},
+                             {' ',' ','P',' ','C',' ','P',' ','P','C'},
+                             {'C',' ','P',' ','C','P',' ','P',' ','C'}
                             }; 
         
         if (num_matriz == 1){
@@ -136,71 +136,79 @@ public class ChatsDeCuisine {
         return matriz1;
     }//final escoger el tablero 
     
-   public int dado(){
-       int dado = ran.nextInt(0,7); 
-       return dado;    
-   }
-   
-   
-    
-    public char [][] Jugar(char tab_actual[][]){
-        int dado = ran.nextInt(0,7);
-        System.out.println("El dado tiro: "+dado);
-        char [][] temp = tab_actual; 
-        posx = this.posx; 
-        posy = this.posy; 
-        System.out.println("h"+posx+","+posy);
-        if (posx < 10 && ((posx += dado) < 9)){
-            posx += dado; 
-            posy = this.posy; 
-        }else{
-            posx = 0; 
+ 
+    public void Jugar(char tab_actual[][]) {
+        
+        System.out.println("");
+        System.out.println("------ DATOS ACTUALES ------");
+        System.out.println("Papas en canasta: "+papas);
+        System.out.println("Sopas listas: "+sopas);
+        System.out.println("Posicion anterior ("+posy+","+posx+")");
+        System.out.println("----------- DADO -----------");
+        //imprime datos actuales de juego
+        int dado = ran.nextInt(6)+1;
+        System.out.println("El dado tiro: " + dado);
+        //System.out.println("h" + posx + "," + posy);
+        int temporal = posx+dado;
+        if (posx < 10 && ((temporal) < 10)) {
+            posx += dado;
+        } else {
+            posx = 0;
             posy++;
-            posx +=dado; 
+            posx += dado;
         }
-        System.out.println(this.posx+", "+this.posy);
-        
-        if (temp[posx][posy]=='P'){
-            papas++; 
-        }else if(temp[posx][posy]=='C'){
-            if(this.papas < 2){
-                System.out.println("No tiene suficientes papas para cocinar\nTendras que seguir colectando");
-                //Luego de esto mostrar el tirar dado 
-                
-            }else{
-           
-                //se divide entre 2 y esa es la cantidad de sopas que se pueden hacer 
-                boolean impar = false; 
-                if (this.papas % 2 == 0){
-                    impar = true; 
-                }else{
-                //Vemos si es impar porque si es impar se deben de calcular las papas restantes
-                    int sopas_posibles = this.papas / 2; 
-                    System.out.println("Podemos cocinar "+sopas_posibles+" sopas\n¿Las cocinamos?\nSi = S o No = N");
-                    char cocinar = papoy.next().charAt(0); 
-                    while (cocinar != 'S' || cocinar != 'N' || cocinar != 'n' || cocinar != 's'){
-                        System.out.println("Debe ingresar S o N\nIngrese De Nuevo: ");
-                        cocinar = papoy.next().charAt(0);
-                    }
-                    if (cocinar == 'S' || cocinar == 's'){
-                        this.sopas += sopas_posibles;
-                        this.papas -= sopas_posibles*2; 
-                        System.out.println("Sopas Listas, Sigamos");
-                    }
-                    
-                } 
+        System.out.println("Nos encontramos en ("+posy+","+posx+")");
+        System.out.println("---------------------------");
+        System.out.println(" ");
+        //System.out.println(this.posx + ", " + this.posy);
+        char prueba = tab_actual[posy][posx]; 
+        tab_actual[posy][posx] = 'G';
+        Imprimir_tab(tab_actual);
+
+        if (prueba == 'P') {
+            System.out.println("");
+            System.out.println("¡Encontramos una papa! Una mas para la canasta");
+            papas++;
+        } else if (prueba == 'C') {
+            System.out.println("");
+            System.out.println("¡Ey, una Cacerola!\n¿Revisamos nuestras papas para ver si podemos cocinar?\nS o N");
+            char revisar = papoy.next().charAt(0); 
+            if (revisar == 'S' && revisar == 's'){
+                if (this.papas < 2) {
+                    System.out.println("No tenemos suficientes papas para cocinar\nSigamos colectando papitas");
+                    //Luego de esto mostrar el tirar dado
+                } else {
+                    //se divide entre 2 y esa es la cantidad de sopas que se pueden hacer
+
+                        int sopas_posibles = this.papas / 2;
+                        System.out.println("Podemos cocinar " + sopas_posibles + " sopas\n¿Las cocinamos?\nSi = S o No = N");
+                        char cocinar = papoy.next().charAt(0);
+                        while (cocinar != 'S'&& cocinar != 's') {
+                            System.out.println("Debe ingresar S o N\nIngrese De Nuevo: ");
+                            cocinar = papoy.next().charAt(0);
+                        }
+                        if (cocinar == 'S' || cocinar == 's') {
+                            this.sopas += sopas_posibles;
+                            this.papas -= sopas_posibles * 2;
+                            System.out.println("Sopas Listas, Sigamos");
+                        }   
+                }
             }
-                
+
         }//si es cacerola
-        temp[posx][posy]='G';
-        
-        return temp; 
+       
+        RemoveG(tab_actual);
     }//jugar
 
     
-    public void rondas(){
-        //rondas con un for o while
-    
+    public void RemoveG(char matriz[][]){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (matriz[i][j] == 'G'){
+                    matriz[i][j] = ' '; 
+                }
+            }
+        }
     
     }
     
