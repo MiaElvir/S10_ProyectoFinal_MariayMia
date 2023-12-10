@@ -12,6 +12,7 @@ public class S10_ProyectoFinal_MiaBelen {
     
     public static void main(String[] args) {
         ChatsDeCuisine cdc = new ChatsDeCuisine(); 
+        Login L = new Login(); 
        /*
         ----Lista----
         1. Matrices (Chats de cuisine)
@@ -23,31 +24,37 @@ public class S10_ProyectoFinal_MiaBelen {
        while (opcion > 0 && opcion < 4){
         switch (opcion){
             case 1: 
-                System.out.println("Bienvenido a Les Chats de Cuisine!\nLas Reglas son las siguientes: \n¿Listo para comenzar?"); 
-                int tablero_elec = ran.nextInt(1,4); 
-                char [][] tablero = cdc.escoger_matriz(tablero_elec); 
-                System.out.println("Tablero Elegido: ");
-                cdc.Imprimir_tab(tablero);
-                //rondas y que luego llame a jugar 
-                for (int i = 0; i < 10; i++) {
-                    cdc.Jugar(tablero);
-                    System.out.println("si o no");
-                    char s = papoy.next().charAt(0);
-                    if (s == 's'){
-                        continue; 
-                    }else{
-                        break; 
+                System.out.println("Bienvenido a Les Chats de Cuisine!\nLas Reglas son las siguientes: \n"
+                        + "1. Debes tirar el dado para determinar tu avance\n2. Cuando encuentres una papa la guardaras en tu canasta\n"
+                        + "3. Al encontrar una cacerola podras revisar tu canasta para determinar si puedes cocinar tus papas (tambien decidiras si cocinar o no)\n"
+                        + " \n¿Deseas ver tu tablero inicial para comenzar? - Responder S o N\n"); 
+                char resp_user = papoy.next().charAt(0); 
+                if(resp_user == 'S' || resp_user == 's'){//Ingreso inicial
+                    
+                    int tablero_elec = ran.nextInt(1,4); 
+                    char [][] tablero = cdc.escoger_matriz(tablero_elec); 
+                    System.out.println("----- Tablero Inicial -----");
+                    cdc.tabInicial(tablero);
+                    System.out.println("Este es tu tablero\n¿Comenzamos?\nS o N");
+                    char comenzar = papoy.next().charAt(0); 
+                    if (comenzar == 'S' || comenzar == 's'){
+                        cdc.Jugar(tablero);
+                        System.out.println(" ");
                     }
+                
+                }else if (resp_user == 'N' || resp_user == 'n'){
+                    System.out.println("No jugaremos");
+                
+                }else{
+                    System.out.println("Caracter no valido, lo cual invalida el juego");
                 }
-                System.out.println(" ");
-                
-                
                 
                 
                 break; 
                 
             case 2: 
                 //Elegancia botanica
+                
                 break; 
             case 3: 
                 //Recursivas

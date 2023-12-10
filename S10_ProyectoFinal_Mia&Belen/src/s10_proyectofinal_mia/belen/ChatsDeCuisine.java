@@ -89,7 +89,7 @@ public class ChatsDeCuisine {
     
     
     
-   public char [][] escoger_matriz(int num_matriz){
+    public char [][] escoger_matriz(int num_matriz){
         //GATOTUILLE
         char [][] matriz1 = {{' ',' ','P','P',' ','P',' ','C',' ','P'},
                              {'P',' ','P',' ','P','C',' ','P',' ',' '},
@@ -123,7 +123,7 @@ public class ChatsDeCuisine {
                              {'P','C',' ','P',' ','P',' ','P',' ','C'},
                              {' ','P','C','P',' ',' ','C','P',' ',' '},
                              {' ',' ','P',' ','C',' ','P',' ','P','C'},
-                             {'C',' ','P',' ','C','P',' ','P',' ','C'}
+                             {'C',' ','P',' ','C','P',' ','P',' ',' '}
                             }; 
         
         if (num_matriz == 1){
@@ -136,70 +136,87 @@ public class ChatsDeCuisine {
         return matriz1;
     }//final escoger el tablero 
     
- 
+    public void tabInicial(char x[][]){
+        x[posx][posy] = 'G'; 
+        Imprimir_tab(x);
+        RemoveG(x);
+    }
     public void Jugar(char tab_actual[][]) {
-        
-        System.out.println("");
-        System.out.println("------ DATOS ACTUALES ------");
-        System.out.println("Papas en canasta: "+papas);
-        System.out.println("Sopas listas: "+sopas);
-        System.out.println("Posicion anterior ("+posy+","+posx+")");
-        System.out.println("----------- DADO -----------");
-        //imprime datos actuales de juego
-        int dado = ran.nextInt(6)+1;
-        System.out.println("El dado tiro: " + dado);
-        //System.out.println("h" + posx + "," + posy);
-        int temporal = posx+dado;
-        if (posx < 10 && ((temporal) < 10)) {
-            posx += dado;
-        } else {
-            posx = 0;
-            posy++;
-            posx += dado;
-        }
-        System.out.println("Nos encontramos en ("+posy+","+posx+")");
-        System.out.println("---------------------------");
-        System.out.println(" ");
-        //System.out.println(this.posx + ", " + this.posy);
-        char prueba = tab_actual[posy][posx]; 
-        tab_actual[posy][posx] = 'G';
-        Imprimir_tab(tab_actual);
-
-        if (prueba == 'P') {
+        char pr_dado = 'S'; 
+        int clientes = ran.nextInt(1,4);
+        System.out.println("---- Informacion Previa ----\nTenemos "+clientes+" clientes, debemos preparar "+clientes+" sopas\n¡Iniciemos!");
+        while (tab_actual[9][9] != 'G' && (pr_dado == 'S' || pr_dado == 's')){
+             
             System.out.println("");
-            System.out.println("¡Encontramos una papa! Una mas para la canasta");
-            papas++;
-        } else if (prueba == 'C') {
-            System.out.println("");
-            System.out.println("¡Ey, una Cacerola!\n¿Revisamos nuestras papas para ver si podemos cocinar?\nS o N");
-            char revisar = papoy.next().charAt(0); 
-            if (revisar == 'S' && revisar == 's'){
-                if (this.papas < 2) {
-                    System.out.println("No tenemos suficientes papas para cocinar\nSigamos colectando papitas");
-                    //Luego de esto mostrar el tirar dado
-                } else {
-                    //se divide entre 2 y esa es la cantidad de sopas que se pueden hacer
+            System.out.println("------ DATOS ACTUALES ------");
+            System.out.println("Papas en canasta: "+papas);
+            System.out.println("Sopas listas: "+sopas);
+            System.out.println("Posicion anterior ("+posx+","+posy+")");
+            System.out.println("----------- DADO -----------\n¡DADO TIRADO!");
+            //imprime datos actuales de juego
+            int dado = ran.nextInt(6)+1;
+            System.out.println("El dado tiro: " + dado);
+            //System.out.println("h" + posx + "," + posy);
+            int temporal = posx+dado;
+            if (posx < 10 && ((temporal) < 10)) {
+                posx += dado;
+            } else {
+                //9-posx, es lo que puede avanzar en x y luego eso se le resta a dado y lo que queda en dado se le suma a posx
+                int rest = 9 - posx; 
+                dado -= rest; 
+                posy++;
+                posx = 0; 
+                posx += dado-1;
+            }
+            System.out.println("Nos encontramos en ("+posx+","+posy+")");
+            System.out.println("---------------------------\n");
+            //System.out.println(this.posx + ", " + this.posy);
+            char prueba = tab_actual[posy][posx]; 
+            tab_actual[posy][posx] = 'G';
+            Imprimir_tab(tab_actual);
 
+            if (prueba == 'P') {//papas
+                System.out.println("");
+                System.out.println("-- ¡Encontramos una papa! Una mas para la canasta\n");
+                papas++;
+            } else if (prueba == 'C') {//cacerolas
+                System.out.println("");
+                System.out.println("-- ¡Ey, una Cacerola!\n¿Revisamos nuestras papas para ver si podemos cocinar?\nS o N");
+                char revisar = papoy.next().charAt(0); 
+                if (revisar == 'S' || revisar == 's'){
+                    if (this.papas < 2) {
+                        System.out.println("No tenemos suficientes papas para cocinar\nSigamos colectando papitas");
+                        //Luego de esto mostrar el tirar dado
+                    } else {
+                        //se divide entre 2 y esa es la cantidad de sopas que se pueden hacer
                         int sopas_posibles = this.papas / 2;
                         System.out.println("Podemos cocinar " + sopas_posibles + " sopas\n¿Las cocinamos?\nSi = S o No = N");
                         char cocinar = papoy.next().charAt(0);
-                        while (cocinar != 'S'&& cocinar != 's') {
-                            System.out.println("Debe ingresar S o N\nIngrese De Nuevo: ");
-                            cocinar = papoy.next().charAt(0);
-                        }
+                     
                         if (cocinar == 'S' || cocinar == 's') {
                             this.sopas += sopas_posibles;
                             this.papas -= sopas_posibles * 2;
                             System.out.println("Sopas Listas, Sigamos");
-                        }   
+                        }else if (cocinar == 'N' || cocinar == 'n'){
+                            System.out.println("Ok, continuemos");
+                        }else{
+                            System.out.println("Caracter no valido,\nIngreselo de nuevo:");
+                            cocinar = papoy.next().charAt(0);
+                        }
+                    }
                 }
+
+            }else{
+                System.out.println("--No encontramos nada, debemos seguir buscando\n");
             }
 
-        }//si es cacerola
-       
-        RemoveG(tab_actual);
+            RemoveG(tab_actual);
+            System.out.println("---- ¿Tiramos el dado? ----");
+            pr_dado = papoy.next().charAt(0);
+            
+        }
     }//jugar
-
+    
     
     public void RemoveG(char matriz[][]){
         for (int i = 0; i < 10; i++) {
