@@ -2,7 +2,7 @@
 package s10_proyectofinal_mia.belen;
 
 import javax.swing.JOptionPane;
-import static s10_proyectofinal_mia.belen.S10_ProyectoFinal_MiaBelen.getOption;
+
 
 
 
@@ -298,13 +298,30 @@ public class productos extends javax.swing.JFrame {
     private void RegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresoActionPerformed
         // regreso
         Panel menu=new Panel ();
+        
+        menu.setVisible(true);
+        this.setVisible(false); 
+        menu.setLocation(290,150); 
+        
        
     }//GEN-LAST:event_RegresoActionPerformed
 
     private void salidainventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidainventarioActionPerformed
         // salida del programa
         this.setVisible(false); 
+        MenuMain var = new MenuMain(); 
+        String op = JOptionPane.showInputDialog(null, "¿Desea volver al Menu Principal?\nS o N"); 
+        char resp = op.charAt(0); 
+        if (resp == 'S' || resp == 's'){
+            var.setVisible(true);
+        }else if(resp == 'N' || resp == 'n'){
+            System.exit(0);
+        }else{
+            JOptionPane.showMessageDialog(null, "Caracter Invalido\nSaliendo del sistema");
+        } 
         
+        //int opcion = getOption("--- MENU ---\n1. Les Chats de cuisine\n2. Inventario Elegancia Botanica\n3. Recursivas\n4. Salir o 'Presione cancelar"); 
+        //int opcion = S10_ProyectoFinal_MiaBelen.getOption("--- MENU ---\n1. Les Chats de cuisine\n2. Inventario Elegancia Botanica\n3. Recursivas\n4. Salir o 'Presione cancelar"); 
         
 //        int opcion = getOption("--- MENU ---\n1. Les Chats de cuisine\n2. Inventario Elegancia Botanica\n3. Recursivas\n4. Salir o 'Presione cancelar");
 //        System.exit(0);
@@ -359,4 +376,8 @@ public class productos extends javax.swing.JFrame {
     private javax.swing.JTextArea reporte;
     private javax.swing.JCheckBoxMenuItem salidainventario;
     // End of variables declaration//GEN-END:variables
+
+    private void setVisisble(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

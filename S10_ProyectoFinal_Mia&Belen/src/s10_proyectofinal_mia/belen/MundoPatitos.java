@@ -3,7 +3,7 @@ package s10_proyectofinal_mia.belen;
 
 import java.util.Random;
 import javax.swing.JOptionPane; 
-import static s10_proyectofinal_mia.belen.S10_ProyectoFinal_MiaBelen.getOption;
+
 
 /**
  *
@@ -23,14 +23,16 @@ public class MundoPatitos extends javax.swing.JFrame {
     }
     
     public int [] PatoNotas(int x[]){
+        this.setVisible(false); 
         int [] temp = new int [x.length]; 
         for (int i = 0; i < x.length; i++) {
             temp[i] = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese PatoNota "+(i+1)+": ")); 
         }
+        this.setVisible(true); 
         return temp; 
     }
     
-    public int SumaNotas(int x[], int in, int sum){ 
+    public int SumaNotas(int x[], int in, int sum){ //recursiva
          
         if (in == x.length-1){
             return suma+x[in]; 
@@ -49,6 +51,7 @@ public class MundoPatitos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ObtenerPase = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        Instru = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,9 +97,19 @@ public class MundoPatitos extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        Instru.setBackground(new java.awt.Color(255, 204, 0));
+        Instru.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Instru.setForeground(new java.awt.Color(0, 0, 0));
+        Instru.setText("Instrucciones");
+        Instru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InstruMouseClicked(evt);
             }
         });
 
@@ -109,13 +122,14 @@ public class MundoPatitos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(ObtenerPase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(Instru, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(61, 61, 61))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,9 +139,11 @@ public class MundoPatitos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(94, 94, 94)
+                .addComponent(Instru, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
                 .addComponent(ObtenerPase, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(45, 45, 45)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -150,23 +166,42 @@ public class MundoPatitos extends javax.swing.JFrame {
         //Recursiva 
         notas = PatoNotas(notas); 
         int total = SumaNotas(notas, 0, suma)/5; 
-        if (total < 60){
-            JOptionPane.showMessageDialog(null, "Sus nota de "+total+" es muy baja\nNo obtuvo su pase\nTenga buen dia\nSaliendo Sistema");
-            System.exit(0);
+        if (total < 50){
+            JOptionPane.showMessageDialog(null, "Sus nota de "+total+" es muy baja\nNo obtuvo su pase\nTenga buen dia\n");
+            
         }else{
-            JOptionPane.showMessageDialog(null, "¡Pase Aprobado!\nSu nota es mayor a 60\nImprimiendo pase\nSaliendo del sistema");
-            System.exit(0);
+            JOptionPane.showMessageDialog(null, "¡Pase Aprobado!\nSu nota es mayor a 50\nImprimiendo pase\n");
+            
         }
         
         
         
     }//GEN-LAST:event_ObtenerPaseMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
-       System.exit(0);
+    private void InstruMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InstruMouseClicked
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+        this.setVisible(false);
+        JOptionPane.showMessageDialog(null, "Las instrucciones son las siguientes\n"
+                + "1. Debera Ingresar las notas de sus 5 clases\n"
+                + "2. Las notas se sumaran y se sacara un promedio a base de las 5\n"
+                + "---- Pases ----\nPromedio Mayor a 50: Pase Aprobado\nPromedio Menor a 50: Pase No Aprobado");
+        this.setVisible(true);
+    }//GEN-LAST:event_InstruMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        this.setVisible(false); 
+        MenuMain var = new MenuMain(); 
+        String op = JOptionPane.showInputDialog(null, "¿Desea volver al Menu Principal?\nS o N"); 
+        char resp = op.charAt(0); 
+        if (resp == 'S' || resp == 's'){
+            var.setVisible(true);
+        }else if(resp == 'N' || resp == 'n'){
+            System.exit(0);
+        }else{
+            JOptionPane.showMessageDialog(null, "Caracter Invalido\nSaliendo del sistema");
+        } 
+        
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -206,6 +241,7 @@ public class MundoPatitos extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Instru;
     private javax.swing.JButton ObtenerPase;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

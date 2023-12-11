@@ -152,7 +152,9 @@ public class ChatsDeCuisine {
                tab_actual[9][9] = 'G';
                Imprimir_tab(tab_actual);
                 System.out.println("\n------- Juego Terminado -------\n------- RESULTADOS -------");
-               if (sopas == clientes){
+                if(sopas == 0 && papas > 0){
+                   System.out.println("- Deberias ser Vendedor de papas en vez de cocinero");
+               }else if (sopas == clientes){
                    System.out.println("- Hiciste "+sopas+" sopas\nTenias "+clientes+" clientes\nAlimentaste a todos, tienes 3 de 3 estrellas");
                }else if (sopas > clientes){
                    System.out.println("- Hiciste "+sopas+" sopas\n"+"Tenias "+clientes+" clientes");
@@ -162,8 +164,6 @@ public class ChatsDeCuisine {
                    System.out.println("- Hiciste "+sopas+" sopas\n"+"Tenias "+clientes+" clientes");
                    int rest_sop = clientes - sopas;
                    System.out.println("- Te faltaron sopas los clientes no se fueron satisfechos\nTe dieron 1 de 3 estrellas");
-               }else if(sopas == 0 && papas > 0){
-                   System.out.println("- Deberias ser Vendedor de papas en vez de cocinero");
                }
                 System.out.println(" ");
                break; 
@@ -239,7 +239,7 @@ public class ChatsDeCuisine {
                 }
 
             }else{
-                System.out.println("--No encontramos nada, debemos seguir buscando\n");
+                System.out.println("\n--No encontramos nada, debemos seguir buscando\n");
             }
 
             RemoveG(tab_actual);
