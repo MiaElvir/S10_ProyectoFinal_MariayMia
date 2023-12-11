@@ -5,22 +5,14 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    static ArrayList<Usuario> listas = new ArrayList();
-    //static Usuario b = new Usuario();
-
-    /**
-     * Creates new form Login
-     */
+    static ArrayList<String> listas = new ArrayList();
+   
     public Login() {// constructor
         initComponents();
         String nombre, contra;
         this.setLocationRelativeTo(null);//que se vea el panel
         // crear una lista
         jTextField1usuario.setText("Peribolita");
-//        jTextField1.setText("Leticia");
-//        b.setNombre(" ");//metodo para colocar el atributo
-//        b.setContra("Letica");
-//        listas.add(b);
     }
     
     @SuppressWarnings("unchecked")
@@ -81,7 +73,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,17 +152,14 @@ public class Login extends javax.swing.JFrame {
         if ( pass.equals("Leticia")) { // no puede ir == porque esta esta comparando objetos
            Panel usuarios=new Panel();
            usuarios.setVisible(true);
+           usuarios.setLocation(290, 150);
             this.setVisible(false);// desaparecer la otra ventana
-//            jDialog1.pack();
-//            jDialog1.setLocationRelativeTo(null);
-//            jDialog1.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, " Usuario o contraseña incorrecta ");
             jTextField1usuario.setText("");
             jTextField1.setText("");
         }
-        jTextField1usuario.setText("");
-        jTextField1.setText("");
+
     }//GEN-LAST:event_IngresarMouseClicked
 
     /**

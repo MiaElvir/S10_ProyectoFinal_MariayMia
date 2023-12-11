@@ -93,37 +93,37 @@ public class ChatsDeCuisine {
         //GATOTUILLE
         char [][] matriz1 = {{' ',' ','P','P',' ','P',' ','C',' ','P'},
                              {'P',' ','P',' ','P','C',' ','P',' ',' '},
-                             {'C','P',' ','P','P','P',' ','P','C','P'},
+                             {'C','P',' ',' ','P',' ',' ','P','C','P'},
                              {' ','P',' ','C','P',' ','C',' ',' ','C'},
                              {'P',' ','C','P',' ','P','C',' ','C',' '},
                              {' ',' ','P','C',' ','P',' ','P','P','P'},
                              {'P','P','P',' ','P','C',' ','P',' ','C'},
-                             {' ','P',' ','P',' ','P',' ','P','C','P'},
+                             {' ','P',' ','P',' ','P',' ',' ','C','P'},
                              {' ',' ',' ','C','P',' ','C',' ',' ','C'},
-                             {'P',' ','C','P',' ','P','C',' ','P',' '}
+                             {'P',' ','C',' ',' ','P','C',' ','P',' '}
                             };
                                  
         char [][] matriz2 = {{' ',' ','P',' ','C','P',' ','P',' ','P'},
                              {'P',' ','P',' ','P',' ','C','P',' ','P'},
-                             {'C','P',' ','P',' ','P','C',' ',' ','C'},
+                             {'C','P',' ','P',' ',' ','C',' ',' ','C'},
                              {'P',' ','C','P','P',' ','P','P',' ','P'},
-                             {'P','P',' ','P',' ','P',' ',' ','C',' '},
+                             {'P','P',' ','P',' ',' ',' ',' ','C',' '},
                              {' ',' ','P',' ','C','P',' ','P',' ','P'},
-                             {'P',' ','P','C','P',' ','p',' ','P',' '},
+                             {'P',' ','P','C','P',' ',' ',' ','P',' '},
                              {'p','P',' ',' ',' ','P',' ',' ',' ','C'},
-                             {'P',' ','C','P','P',' ',' ','P',' ','P'},
-                             {'C','P',' ','P',' ','P','P',' ','C',' '}
+                             {'P',' ','C',' ','P',' ',' ','P',' ','P'},
+                             {'C','P',' ','P',' ','P',' ',' ','C',' '}
                             }; 
         char [][] matriz3 = {{' ',' ',' ','P',' ','C','P','C',' ','P'},
-                             {'P','C',' ','P','P',' ',' ','P',' ','P'},
+                             {'P','C',' ','P','P',' ',' ',' ',' ','P'},
                              {' ','P','C','P',' ','P','C','C',' ','P'},
                              {' ','P',' ',' ','C',' ',' ',' ','P',' '},
-                             {'P',' ','P',' ','C','P',' ','P',' ','C'},
+                             {'P',' ',' ',' ','C','P',' ','P',' ','C'},
                              {'P',' ',' ','P',' ','C','P','C',' ','P'},
                              {'P','C',' ','P',' ','P',' ','P',' ','C'},
-                             {' ','P','C','P',' ',' ','C','P',' ',' '},
+                             {' ','P','C',' ',' ',' ','C','P',' ',' '},
                              {' ',' ','P',' ','C',' ','P',' ','P','C'},
-                             {'C',' ','P',' ','C','P',' ','P',' ',' '}
+                             {'C',' ','P',' ','C',' ',' ','P',' ',' '}
                             }; 
         
         if (num_matriz == 1){
@@ -146,7 +146,28 @@ public class ChatsDeCuisine {
         int clientes = ran.nextInt(1,4);
         System.out.println("---- Informacion Previa ----\nTenemos "+clientes+" clientes, debemos preparar "+clientes+" sopas\n¡Iniciemos!");
         while (tab_actual[9][9] != 'G' && (pr_dado == 'S' || pr_dado == 's')){
-             
+            int dado = ran.nextInt(6)+1;
+            int temporal = posx+dado;
+            if (posy == 9 && temporal > 9){
+               tab_actual[9][9] = 'G';
+               Imprimir_tab(tab_actual);
+                System.out.println("\n------- Juego Terminado -------\n------- RESULTADOS -------");
+               if (sopas == clientes){
+                   System.out.println("- Hiciste "+sopas+" sopas\nTenias "+clientes+" clientes\nAlimentaste a todos, tienes 3 de 3 estrellas");
+               }else if (sopas > clientes){
+                   System.out.println("- Hiciste "+sopas+" sopas\n"+"Tenias "+clientes+" clientes");
+                   int rest_sop = sopas - clientes; 
+                   System.out.println("- Te sobraron "+rest_sop+" sopas\nHiciste Sopas suficientes para todos, tienes 3 de 3 Estrellas");
+               }else if(sopas < clientes){
+                   System.out.println("- Hiciste "+sopas+" sopas\n"+"Tenias "+clientes+" clientes");
+                   int rest_sop = clientes - sopas;
+                   System.out.println("- Te faltaron sopas los clientes no se fueron satisfechos\nTe dieron 1 de 3 estrellas");
+               }else if(sopas == 0 && papas > 0){
+                   System.out.println("- Deberias ser Vendedor de papas en vez de cocinero");
+               }
+                System.out.println(" ");
+               break; 
+            }
             System.out.println("");
             System.out.println("------ DATOS ACTUALES ------");
             System.out.println("Papas en canasta: "+papas);
@@ -154,14 +175,21 @@ public class ChatsDeCuisine {
             System.out.println("Posicion anterior ("+posx+","+posy+")");
             System.out.println("----------- DADO -----------\n¡DADO TIRADO!");
             //imprime datos actuales de juego
-            int dado = ran.nextInt(6)+1;
+//            int dado = ran.nextInt(6)+1;
+//            int temporal = posx+dado;
+//            while (posy == 9 && temporal != 9){
+//                dado = ran.nextInt(6)+1;
+//                break; 
+//            }
             System.out.println("El dado tiro: " + dado);
             //System.out.println("h" + posx + "," + posy);
-            int temporal = posx+dado;
+            
+            
             if (posx < 10 && ((temporal) < 10)) {
                 posx += dado;
             } else {
                 //9-posx, es lo que puede avanzar en x y luego eso se le resta a dado y lo que queda en dado se le suma a posx
+                
                 int rest = 9 - posx; 
                 dado -= rest; 
                 posy++;
@@ -174,6 +202,7 @@ public class ChatsDeCuisine {
             char prueba = tab_actual[posy][posx]; 
             tab_actual[posy][posx] = 'G';
             Imprimir_tab(tab_actual);
+            
 
             if (prueba == 'P') {//papas
                 System.out.println("");
@@ -204,6 +233,9 @@ public class ChatsDeCuisine {
                             cocinar = papoy.next().charAt(0);
                         }
                     }
+                }else if(revisar == 'N' || revisar == 'n'){
+                    System.out.println("Esta bien, ¡Continuamos!\nTus papas quedan intactas en tu canasta");
+                    
                 }
 
             }else{
@@ -211,10 +243,18 @@ public class ChatsDeCuisine {
             }
 
             RemoveG(tab_actual);
+            
             System.out.println("---- ¿Tiramos el dado? ----");
-            pr_dado = papoy.next().charAt(0);
+            pr_dado = papoy.next().charAt(0); 
+            
+        }//fin while
+        if (pr_dado == 'n' || pr_dado == 'N'){
+            System.out.println("Juego finalizado\nRegresando al menu principal");    
+        }else{
             
         }
+        
+        
     }//jugar
     
     
